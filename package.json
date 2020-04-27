@@ -1,0 +1,19 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "peekaboo - hide and seek",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NC-project-team-2020/BE-hide-and-seek.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NC-project-team-2020/BE-hide-and-seek/issues"
+  },
+  "homepage": "https://github.com/NC-project-team-2020/BE-hide-and-seek#readme"
+}
