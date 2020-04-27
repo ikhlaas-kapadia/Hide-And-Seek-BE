@@ -4,7 +4,8 @@
   "description": "peekaboo - hide and seek",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon listen.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/NC-project-team-2020/BE-hide-and-seek/issues"
   },
-  "homepage": "https://github.com/NC-project-team-2020/BE-hide-and-seek#readme"
+  "homepage": "https://github.com/NC-project-team-2020/BE-hide-and-seek#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.6",
+    "mongoose": "^5.9.10",
+    "nodemon": "^2.0.3",
+    "validator": "^13.0.0"
+  }
 }
