@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      unique: true,
     },
     first_name: {
       type: String,
@@ -59,8 +60,16 @@ const User = mongoose.model("users", userSchema);
 
 const signInUser = async ({ user_name, password }) => {
   const user = await User.findOne({ user_name });
+  console.log(user)
+  if (!user) {
+    return Promise.reject({
+      status: 401,
+      msg: "Username/Password is incorrect",
+    });
+  }
   const auth = await authUser(password, user.password);
-  if (!auth || !user) {
+  console.log(auth)
+  if (!auth) {
     return Promise.reject({
       status: 401,
       msg: "Username/Password is incorrect",
@@ -86,7 +95,7 @@ const registerUser = async ({
     password: encrypt,
   });
   const newUser = await createUser.save();
-  return newUser;
+  return { id: newUser._id, user_name: newUser.user_name };
 };
 
 module.exports = { signInUser, registerUser, User };
