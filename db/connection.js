@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 
-const uri =
-  "mongodb+srv://peekaboo:QJx9g8LlYp@peekaboo-hryue.mongodb.net/peekaboo?retryWrites=true&w=majority";
+let dbUrl;
+if(process.env.NODE_ENV === "test") dbUrl = process.env.DB_CONNECTION_TEST
+else if(process.env.NODE_ENV === "dev") dbUrl = process.env.DB_CONNECTION_DEV
+else if(process.env.NODE_ENV === "prod") dbUrl = process.env.DB_CONNECTION_PROD
 
 mongoose
-  .connect(uri, {
+  .connect(dbUrl, {
     useNewUrlParser: true,
   })
   .then(() => console.log("connected"))

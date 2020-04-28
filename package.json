@@ -5,7 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon listen.js"
+    "dev": "NODE_ENV=dev nodemon listen.js",
+    "seed-test": "NODE_ENV=test node db/seeder.js",
+    "seed-dev": "NODE_ENV=dev node db/seeder.js",
+    "seed-prod": "NODE_ENV=prod node db/seeder.js"
   },
   "repository": {
     "type": "git",
@@ -19,10 +22,15 @@
   "homepage": "https://github.com/NC-project-team-2020/BE-hide-and-seek#readme",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.6",
     "mongoose": "^5.9.10",
-    "nodemon": "^2.0.3",
+    "mongoose-seed": "^0.6.0",
     "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }
