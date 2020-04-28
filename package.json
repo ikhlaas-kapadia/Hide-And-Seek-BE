@@ -9,7 +9,7 @@
     "start": "NODE_ENV=prod node listen.js",
     "seed-test": "NODE_ENV=test node db/seeder.js",
     "seed-dev": "NODE_ENV=dev node db/seeder.js",
-    "seed-prod": "NODE_ENV=prod node db/seeder.js"
+    "seed-prod": "NODE_ENV=production node db/seeder.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "validator": "^13.0.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "nodemon": "^2.0.3"
   }
 }
