@@ -4,7 +4,7 @@
   "description": "peekaboo - hide and seek",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha spec/app.spec.js",
     "dev": "NODE_ENV=dev nodemon listen.js",
     "seed-test": "NODE_ENV=test node db/seeder.js",
     "seed-dev": "NODE_ENV=dev node db/seeder.js",
@@ -28,9 +28,13 @@
     "mongodb": "^3.5.6",
     "mongoose": "^5.9.10",
     "mongoose-seed": "^0.6.0",
+    "nodemon": "^2.0.3",
     "validator": "^13.0.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2"
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
+    "mocha": "^7.1.2",
+    "supertest": "^4.0.2"
   }
 }
