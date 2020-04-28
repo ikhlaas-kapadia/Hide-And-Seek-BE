@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=dev nodemon listen.js",
+    "start": "NODE_ENV=prod node listen.js",
     "seed-test": "NODE_ENV=test node db/seeder.js",
     "seed-dev": "NODE_ENV=dev node db/seeder.js",
     "seed-prod": "NODE_ENV=prod node db/seeder.js"
