@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const saltRounds = 10;
 
@@ -17,6 +17,7 @@ const generateToken = (user_name) => {
   const token = jwt.sign({ user_name }, process.env.TOKEN_SECRET);
   return token;
 };
+
 module.exports = {
   encryptPassword,
   authUser,
