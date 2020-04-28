@@ -1,14 +1,13 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();
 require("./db/connection");
+
 const { apiRouter } = require("./routers/api-router");
+const { handleErrors } = require("./errors/errors");
+
 app.use(express.json());
 app.use("/api", apiRouter);
-
-// app.get("/test", (req, res, next) => {
-//   res.send("test");
-// });
-
-// app.get("/");
+app.use(handleErrors);
 
 module.exports = { app };
