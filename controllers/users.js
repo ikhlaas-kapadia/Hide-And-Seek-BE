@@ -1,15 +1,19 @@
-const { fetchUser, registerUser } = require("../models/users");
+const { signInUser, registerUser } = require("../models/users");
 
-const getUser = (req, res, next) => {
-  fetchUser().then((users) => {
-    res.send(users);
-  });
+const loginUser = (req, res, next) => {
+  signInUser(req.body)
+    .then((user) => {
+      res.status(200).send({ user });
+    })
+    .catch(next);
 };
 
 const postUser = (req, res, next) => {
-  registerUser(req.body).then((newUser) => {
-    res.status(201).send(newUser);
-  });
+  registerUser(req.body)
+    .then((newUser) => {
+      res.status(201).send(newUser);
+    })
+    .catch(next);
 };
 
-module.exports = { getUser, postUser };
+module.exports = { loginUser, postUser };

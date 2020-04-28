@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const { encryptPassword } = require("../utils/file-auth");
+const {
+  encryptPassword,
+  authUser,
+  generateToken,
+} = require("../utils/file-auth");
 
 const userSchema = new mongoose.Schema(
   {
@@ -53,9 +57,17 @@ const userSchema = new mongoose.Schema(
 
 const User = mongoose.model("users", userSchema);
 
-const fetchUser = async () => {
-  const user = await User.find({});
-  return user;
+const signInUser = async ({ user_name, password }) => {
+  const user = await User.findOne({ user_name });
+  const auth = await authUser(password, user.password);
+  if (!auth || !user) {
+    return Promise.reject({
+      status: 401,
+      msg: "Username/Password is incorrect",
+    });
+  }
+  const token = generateToken(user_name);
+  return { id: user.id, user_name: user.user_name, token };
 };
 
 const registerUser = async ({
@@ -77,4 +89,4 @@ const registerUser = async ({
   return newUser;
 };
 
-module.exports = { fetchUser, registerUser };
+module.exports = { signInUser, registerUser, User };
