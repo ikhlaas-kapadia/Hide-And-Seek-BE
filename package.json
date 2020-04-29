@@ -7,9 +7,9 @@
     "test": "mocha spec/app.spec.js",
     "dev": "NODE_ENV=dev nodemon listen.js",
     "start": "NODE_ENV=production node listen.js",
-    "seed-test": "NODE_ENV=test node db/seeder.js",
-    "seed-dev": "NODE_ENV=dev node db/seeder.js",
-    "seed-prod": "NODE_ENV=production node db/seeder.js"
+    "seed-test": "NODE_ENV=test node db/database-seeder.js",
+    "seed-dev": "NODE_ENV=dev node db/database-seeder.js",
+    "seed-prod": "NODE_ENV=production node db/database-seeder.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/NC-project-team-2020/BE-hide-and-seek#readme",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

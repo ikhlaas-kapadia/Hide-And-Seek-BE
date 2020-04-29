@@ -60,7 +60,6 @@ const User = mongoose.model("users", userSchema);
 
 const signInUser = async ({ user_name, password }) => {
   const user = await User.findOne({ user_name });
-  console.log(user)
   if (!user) {
     return Promise.reject({
       status: 401,
@@ -68,7 +67,6 @@ const signInUser = async ({ user_name, password }) => {
     });
   }
   const auth = await authUser(password, user.password);
-  console.log(auth)
   if (!auth) {
     return Promise.reject({
       status: 401,
