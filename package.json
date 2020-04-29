@@ -7,9 +7,9 @@
     "test": "mocha spec/app.spec.js",
     "dev": "NODE_ENV=dev nodemon listen.js",
     "start": "NODE_ENV=production node listen.js",
-    "seed-test": "NODE_ENV=test node db/seeder.js",
-    "seed-dev": "NODE_ENV=dev node db/seeder.js",
-    "seed-prod": "NODE_ENV=production node db/seeder.js"
+    "seed-test": "NODE_ENV=test node db/database-seeder.js",
+    "seed-dev": "NODE_ENV=dev node db/database-seeder.js",
+    "seed-prod": "NODE_ENV=production node db/database-seeder.js"
   },
   "repository": {
     "type": "git",

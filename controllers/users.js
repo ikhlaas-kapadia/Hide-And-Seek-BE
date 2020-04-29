@@ -1,7 +1,6 @@
 const { signInUser, registerUser } = require("../models/users");
 
 const loginUser = (req, res, next) => {
-  console.log(req.body, "body");
   signInUser(req.body)
     .then((user) => {
       res.status(200).send({ user });

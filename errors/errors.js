@@ -1,5 +1,4 @@
 exports.handleErrors = (err, req, res, next) => {
-  console.log(err);
   if (err.code === 11000) {
     if (err.keyPattern.email) {
       res.status(401).send({
