@@ -1,13 +1,16 @@
-const generateData = require("./data/generateData");
-const mongoose = require("mongoose");
-const connectionSettings = require("./connectionSettings.js");
-require("dotenv").config();
-const { User } = require("../models/users");
+const generateData = require('./data/generateData');
+const mongoose = require('mongoose');
+const connectionSettings = require('./connectionSettings.js');
+require('dotenv').config();
+const { User } = require('../models/users.model');
+const { Result } = require('../models/results.model');
 
 const seed = async () => {
-  const data = await generateData();
+  const { userData, resultsData } = await generateData();
   await User.deleteMany({});
-  await User.insertMany(data);
+  await Result.deleteMany({});
+  await User.insertMany(userData);
+  await Result.insertMany(resultsData);
 };
 
 const closeDB = async () => {
