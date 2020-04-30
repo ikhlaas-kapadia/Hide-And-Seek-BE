@@ -1,18 +1,16 @@
-const { encryptPassword } = require('../../utils/file-auth');
-const devData = require('../data/development-data/users');
-const testData = require('../data/test-data/users');
-const prodData = require('../data/production-data/users');
+const { encryptPassword } = require('../../utils/auth-util');
 
 const generateData = async () => {
-  let data;
-  if (process.env.NODE_ENV === 'test') data = testData;
-  else if (process.env.NODE_ENV === 'dev') data = devData;
-  else if (process.env.NODE_ENV === 'production') data = prodData;
-
-  for (let i = 0; i < data.length; i++) {
-    data[i].password = await encryptPassword(data[i].password);
+  let dataPath;
+  if (process.env.NODE_ENV === 'test') dataPath = 'test-data';
+  else if (process.env.NODE_ENV === 'dev') dataPath = 'development-data';
+  else if (process.env.NODE_ENV === 'production') dataPath = 'production-data';
+  const userData = require(`../data/${dataPath}/users`);
+  const resultsData = require(`../data/${dataPath}/results`);
+  for (let i = 0; i < userData.length; i++) {
+    userData[i].password = await encryptPassword(userData[i].password);
   }
-  return data;
+  return { userData, resultsData };
 };
 
 module.exports = generateData;

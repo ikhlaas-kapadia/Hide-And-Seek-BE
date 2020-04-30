@@ -1,4 +1,4 @@
-const { signInUser, registerUser } = require("../models/users");
+const { signInUser, registerUser } = require('../models/users.model');
 
 const loginUser = (req, res, next) => {
   signInUser(req.body)
@@ -11,7 +11,7 @@ const loginUser = (req, res, next) => {
 const postUser = (req, res, next) => {
   registerUser(req.body)
     .then((newUser) => {
-      res.status(201).send({user: newUser});
+      res.status(201).send({ user: newUser });
     })
     .catch(next);
 };
