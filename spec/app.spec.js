@@ -2,12 +2,11 @@ process.env.NODE_ENV = 'test';
 const { app } = require('../app');
 const { expect } = require('chai');
 const request = require('supertest');
+const { generateToken } = require('../utils/auth-util');
 const { seed, closeDB, openConnection } = require('../db/seeder.js');
+let mockToken = generateToken('test');
 
 describe('/api', () => {
-  // before(async () => {
-  //   await openConnection();
-  // });
   beforeEach(async () => {
     await seed();
   });
@@ -90,6 +89,7 @@ describe('/api', () => {
       it('it should return correct results for a user', () => {
         return request(app)
           .get('/api/results?user_id=5eaa9ed332a717312f9c7cbd')
+          .set('Authorization', 'Bearer ' + mockToken)
           .expect(200)
           .then((res) => {
             expect(res.body.results.win_count).to.equal(3);
@@ -102,6 +102,7 @@ describe('/api', () => {
       it('it should return no results for incorrect user id', () => {
         return request(app)
           .get('/api/results?user_id=5eaa9ed332a717312fdsds9c7cbd')
+          .set('Authorization', 'Bearer ' + mockToken)
           .expect(200)
           .then((res) => {
             expect(res.body.results.win_count).to.equal(0);
@@ -116,6 +117,7 @@ describe('/api', () => {
       it('it should add a new result to the results table', () => {
         return request(app)
           .post('/api/results')
+          .set('Authorization', 'Bearer ' + mockToken)
           .send({
             room: 'testroom1',
             winner: {
@@ -139,6 +141,7 @@ describe('/api', () => {
       it('it should return 400 if missing body info', () => {
         return request(app)
           .post('/api/results')
+          .set('Authorization', 'Bearer ' + mockToken)
           .send({
             room: 'testroom1',
             losers: [
@@ -151,4 +154,19 @@ describe('/api', () => {
       });
     });
   });
+  // describe('Test authorized routes', () => {
+  //   it('/api/result', () => {
+  //     return request(app)
+  //       .post('/api/results')
+  //       .send({
+  //         room: 'testroom1',
+  //         losers: [
+  //           { user_id: '5eaa9ed332a717312f9c7cbe', user_name: 'jaytest' },
+  //           { user_id: '5eaa9ed332a717312f9c7cbf', user_name: 'bobtest' },
+  //           { user_id: '5eaa9ed332a717312f9c7cc0', user_name: 'Hannes12' },
+  //         ],
+  //       })
+  //       .expect(403);
+  //   });
+  // });
 });

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const sharp = require('sharp');
 const { userImage } = require('../utils/image-data');
 const {
   encryptPassword,
@@ -49,7 +50,7 @@ const userSchema = new mongoose.Schema(
       },
     },
     avatar: {
-      type: String,
+      type: Buffer,
       default: userImage,
     },
   },
@@ -105,4 +106,16 @@ const registerUser = async ({
   return { id: newUser._id, user_name: newUser.user_name };
 };
 
-module.exports = { signInUser, registerUser, User };
+const updateUser = async ({ file, body }) => {
+  const buffer = await sharp(file.buffer)
+    .resize({ width: 250, height: 250 })
+    .png()
+    .toBuffer();
+  const userUpdate = await User.findOneAndUpdate(
+    { _id: body.user_id },
+    { avatar: buffer }
+  );
+  return userUpdate;
+};
+
+module.exports = { signInUser, registerUser, updateUser, User };
