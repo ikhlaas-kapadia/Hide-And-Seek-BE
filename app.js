@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const cors = require('cors');
 
 require('dotenv').config();
 require('./db/connection');
+require('./sockets/sockets')(io);
 
 const { apiRouter } = require('./routers/api-router');
 const { handleErrors } = require('./errors/errors');
@@ -16,4 +19,4 @@ app.use('/api', apiRouter);
 
 app.use(handleErrors);
 
-module.exports = { app };
+module.exports = { app, http, io };
