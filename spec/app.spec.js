@@ -154,19 +154,40 @@ describe('/api', () => {
       });
     });
   });
-  // describe('Test authorized routes', () => {
-  //   it('/api/result', () => {
-  //     return request(app)
-  //       .post('/api/results')
-  //       .send({
-  //         room: 'testroom1',
-  //         losers: [
-  //           { user_id: '5eaa9ed332a717312f9c7cbe', user_name: 'jaytest' },
-  //           { user_id: '5eaa9ed332a717312f9c7cbf', user_name: 'bobtest' },
-  //           { user_id: '5eaa9ed332a717312f9c7cc0', user_name: 'Hannes12' },
-  //         ],
-  //       })
-  //       .expect(403);
-  //   });
-  // });
+  describe('Test authorized routes', () => {
+    it('/api/results', () => {
+      return request(app)
+        .post('/api/results')
+        .send({
+          room: 'testroom1',
+          losers: [
+            { user_id: '5eaa9ed332a717312f9c7cbe', user_name: 'jaytest' },
+            { user_id: '5eaa9ed332a717312f9c7cbf', user_name: 'bobtest' },
+            { user_id: '5eaa9ed332a717312f9c7cc0', user_name: 'Hannes12' },
+          ],
+        })
+        .expect(401)
+        .then((res) => {
+          expect(res.body.msg).to.equal('Auth token is not supplied');
+        });
+    });
+    it('/api/results', () => {
+      return request(app)
+        .get('/api/results?user_id=5eaa9ed332a717312f9c7cbd')
+        .set('Authorization', 'Bearer ' + '121')
+        .expect(401)
+        .then((res) => {
+          expect(res.body.msg).to.equal('Token is not valid');
+        });
+    });
+    it('/api/users/profile', () => {
+      return request(app)
+        .patch('/api/users/profile')
+        .set('Authorization', 'Bearer ' + '121')
+        .expect(401)
+        .then((res) => {
+          expect(res.body.msg).to.equal('Token is not valid');
+        });
+    });
+  });
 });
