@@ -18,10 +18,12 @@ const sockets = (io) => {
       addUser({
         id: socket.id,
         user_name: event.user_name,
+        user_id: event.user_id,
         roomPass: roomPass,
       });
       socket.emit('createRoom', {
         user_name: event.user_name,
+        user_id: event.user_id,
         roomName: event.room,
         roomPassword: roomPass,
         users: getUsersInRoom(roomPass),
@@ -35,6 +37,7 @@ const sockets = (io) => {
       addUser({
         id: socket.id,
         user_name: event.user_name,
+        user_id: event.user_id,
         roomPass: event.roomPass,
       });
       socket.to(event.roomPass).emit('usersUpdate', {
@@ -67,6 +70,7 @@ const sockets = (io) => {
     socket.on('seekerPosition', (event) => {
       socket.to(event.roomPass).emit('seekerPosition', {
         user_name: event.user_name,
+        user_id: event.user_id,
         longitude: event.longitude,
         latitude: event.latitude,
       });
@@ -76,6 +80,7 @@ const sockets = (io) => {
     socket.on('hiderPosition', (event) => {
       socket.to(event.roomPass).emit('hiderPosition', {
         user_name: event.user_name,
+        user_id: event.user_id,
         longitude: event.longitude,
         latitude: event.latitude,
       });
@@ -86,6 +91,7 @@ const sockets = (io) => {
       socket.to(event.roomPass).emit('sendClue', {
         msg: event.msg,
         user_name: event.user_name,
+        user_id: event.user_id,
         date: format(new Date(), 'dd/MM/yyyy HH:mm:ss'),
       });
     });
