@@ -12,6 +12,7 @@ const sockets = (io) => {
     // create a game lobby event
 
     socket.on('createRoom', (event) => {
+      console.log('room created');
       const roomPass = roomPassGen(event.room);
       socket.join(roomPass);
       addUser({
