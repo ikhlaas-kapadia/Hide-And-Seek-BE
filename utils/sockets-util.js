@@ -4,8 +4,8 @@ const roomPassGen = (room) => {
   return `${room}#${Math.floor(Math.random() * (999999 - 100000)) + 100000}`;
 };
 
-const addUser = ({ id, user_name, roomPass }) => {
-  const user = { id, user_name, roomPass };
+const addUser = ({ id, user_id, user_name, roomPass }) => {
+  const user = { id, user_id, user_name, roomPass };
   users.push(user);
   return { user };
 };
