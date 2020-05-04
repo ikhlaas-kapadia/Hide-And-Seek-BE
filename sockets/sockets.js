@@ -40,7 +40,7 @@ const sockets = (io) => {
         user_id: event.user_id,
         roomPass: event.roomPass,
       });
-      socket.to(event.roomPass).emit('usersUpdate', {
+      socket.to(event.roomPass).emit('joinRoom', {
         msg: `${event.user_name} has join the game!`,
         users: getUsersInRoom(event.roomPass),
       });
