@@ -1,4 +1,5 @@
 const users = [];
+const { format, addMinutes } = require('date-fns');
 
 const roomPassGen = (room) => {
   return `${room}#${Math.floor(Math.random() * (999999 - 100000)) + 100000}`;
@@ -25,10 +26,17 @@ const getUsersInRoom = (room) => {
   return users.filter((user) => user.roomPass === room);
 };
 
+const timeCalc = (time) => {
+  return addMinutes(new Date(), time);
+};
+
+const seekTimeCalc = () => {};
+
 module.exports = {
   roomPassGen,
   removeUser,
   addUser,
   getUser,
   getUsersInRoom,
+  timeCalc,
 };

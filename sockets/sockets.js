@@ -3,6 +3,7 @@ const {
   addUser,
   getUsersInRoom,
   removeUser,
+  timeCalc,
 } = require('../utils/sockets-util');
 const { format } = require('date-fns');
 
@@ -105,6 +106,24 @@ const sockets = (io) => {
       socket.to(event.roomPass).emit('distanceAlert', {
         msg: `You are ${event.distance}m away from the ${event.hider}!`,
         distance: event.distance,
+      });
+    });
+
+    // start game - hiding
+    socket.on('startGame', (event) => {
+      const hideTime = timeCalc(event.hideTime);
+      console.log(hideTime);
+      socket.to(event.roomPass).emit('startGame', {
+        hideTime,
+      });
+    });
+
+    // start seeking
+    socket.on('startSeek', (event) => {
+      const seekTime = timeCalc(event.seekTime);
+      console.log(seekTime);
+      socket.to(event.roomPass).emit('startSeek', {
+        seekTime,
       });
     });
 
