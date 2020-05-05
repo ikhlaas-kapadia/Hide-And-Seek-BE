@@ -113,16 +113,17 @@ const sockets = (io) => {
     socket.on('startGame', (event) => {
       const hideTime = timeCalc(event.hideTime);
       console.log(hideTime);
-      socket.to(event.roomPass).emit('startGame', {
+      io.in(event.roomPass).emit('startGame', {
         hideTime,
       });
     });
 
     // start seeking
     socket.on('startSeek', (event) => {
+      console.log(event);
       const seekTime = timeCalc(event.seekTime);
       console.log(seekTime);
-      socket.to(event.roomPass).emit('startSeek', {
+      io.in(event.roomPass).emit('startSeek', {
         seekTime,
       });
     });
