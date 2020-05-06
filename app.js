@@ -11,7 +11,7 @@ require('./sockets/sockets')(io);
 
 const { apiRouter } = require('./routers/api-router');
 const { handleErrors } = require('./errors/errors');
-app.use('/public', express.static(path.join(__dirname, '../public')));
+app.use('/public', express.static(path.join(__dirname, '../../public')));
 app.use(cors());
 
 app.use(express.json());
