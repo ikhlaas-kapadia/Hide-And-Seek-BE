@@ -8,6 +8,7 @@ const {
   generateToken,
 } = require('../utils/auth-util');
 const fs = require('fs').promises;
+const path = require('path');
 
 const userSchema = new mongoose.Schema(
   {
@@ -115,7 +116,10 @@ const updateUser = async ({ file, body }) => {
 
   imageData = image.toString('binary');
 
-  const imgPath = `${__dirname}/../public/avatars/${body.user_id}.png`;
+  const imgPath = path.join(
+    __dirname,
+    `/../public/avatars/${body.user_id}.png`
+  );
   fs.writeFile(imgPath, imageData, 'binary', (err) => {});
 
   // const userUpdate = await User.findOneAndUpdate(
