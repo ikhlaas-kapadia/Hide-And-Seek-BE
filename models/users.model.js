@@ -116,7 +116,7 @@ const updateUser = async ({ file, body }) => {
 
   imageData = image.toString('binary');
 
-  const imgPath = path.join(__dirname, `/public/avatars/${body.user_id}.png`);
+  const imgPath = path.join(__dirname, `../public/avatars/${body.user_id}.png`);
   fs.writeFile(imgPath, imageData, 'binary', (err) => {});
 
   // const userUpdate = await User.findOneAndUpdate(
