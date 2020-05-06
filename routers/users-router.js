@@ -10,7 +10,7 @@ const {
 
 const avatarUpload = multer({
   limits: {
-    fileSize: 5000000,
+    fileSize: 10000000,
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {

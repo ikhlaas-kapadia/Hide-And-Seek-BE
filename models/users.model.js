@@ -7,6 +7,7 @@ const {
   authUser,
   generateToken,
 } = require('../utils/auth-util');
+const fs = require('fs').promises;
 
 const userSchema = new mongoose.Schema(
   {
@@ -107,15 +108,21 @@ const registerUser = async ({
 };
 
 const updateUser = async ({ file, body }) => {
-  const buffer = await sharp(file.buffer)
+  const image = await sharp(file.buffer)
     .resize({ width: 250, height: 250 })
     .png()
     .toBuffer();
-  const userUpdate = await User.findOneAndUpdate(
-    { _id: body.user_id },
-    { avatar: buffer }
-  );
-  return userUpdate;
+
+  imageData = image.toString('binary');
+
+  const imgPath = `${__dirname}/../public/avatars/${body.user_id}.png`;
+  fs.writeFile(imgPath, imageData, 'binary', (err) => {});
+
+  // const userUpdate = await User.findOneAndUpdate(
+  //   { _id: body.user_id },
+  //   { avatar: buffer }
+  // );
+  // return userUpdate;
 };
 
 module.exports = { signInUser, registerUser, updateUser, User };
