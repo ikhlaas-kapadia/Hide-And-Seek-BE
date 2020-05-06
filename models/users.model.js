@@ -107,7 +107,7 @@ const registerUser = async ({
 };
 
 const updateUser = async ({ file, body }) => {
-  const image = await sharp(file.buffer)
+  const buffer = await sharp(file.buffer)
     .resize({ width: 250, height: 250 })
     .png()
     .toBuffer();
