@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
+const connectionSettings = require("./connectionSettings.js")
 
-const uri =
-  "mongodb+srv://peekaboo:QJx9g8LlYp@peekaboo-hryue.mongodb.net/peekaboo?retryWrites=true&w=majority";
+const dbUrl = connectionSettings();
 
 mongoose
-  .connect(uri, {
+  .connect(dbUrl, {
     useNewUrlParser: true,
   })
   .then(() => console.log("connected"))
   .catch((err) => console.log(err));
+
+module.exports = { dbUrl };
