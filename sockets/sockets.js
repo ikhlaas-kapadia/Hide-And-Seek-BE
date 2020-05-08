@@ -115,6 +115,9 @@ const sockets = (io) => {
       console.log(hideTime);
       io.in(event.roomPass).emit('startGame', {
         hideTime,
+        latitude: event.latitude,
+        longitude: event.longitude,
+        radiusMetres: event.radiusMetres,
       });
     });
 
