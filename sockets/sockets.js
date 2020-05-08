@@ -149,7 +149,7 @@ const sockets = (io) => {
 
     // end game
     socket.on('endGame', (event) => {
-      socket.to(event.roomPass).emit('endGame', {
+      io.to(event.roomPass).emit('endGame', {
         winner: event.winner,
       });
     });
