@@ -132,6 +132,20 @@ const sockets = (io) => {
       });
     });
 
+    // confirm find
+    socket.on('confirmFind', (event) => {
+      socket.to(event.roomPass).emit('confirmFind', {
+        msg: `${event.userName} has claimed found you, can you confirm?`,
+      });
+    });
+
+    // confirm find reply
+    socket.on('confirmFindReply', (event) => {
+      socket.to(event.roomPass).emit('confirmFindReply', {
+        confirm: event.confirm,
+      });
+    });
+
     // end game
     socket.on('endGame', (event) => {
       socket.to(event.roomPass).emit('endGame', {
