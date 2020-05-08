@@ -136,6 +136,7 @@ const sockets = (io) => {
     socket.on('confirmFind', (event) => {
       socket.to(event.roomPass).emit('confirmFind', {
         msg: `${event.userName} has claimed to found you, can you confirm?`,
+        userName: event.userName,
       });
     });
 
