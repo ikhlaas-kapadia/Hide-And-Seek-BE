@@ -116,7 +116,7 @@ const updateUser = async ({ file, body }) => {
     { _id: body.user_id },
     { avatar: buffer }
   );
-  return userUpdate;
+  return { _id: body.user_id, avatar: buffer };
 };
 
 module.exports = { signInUser, registerUser, updateUser, User };

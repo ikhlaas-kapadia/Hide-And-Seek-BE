@@ -23,6 +23,7 @@ const postUser = (req, res, next) => {
 const patchUser = (req, res, next) => {
   updateUser(req)
     .then((user) => {
+      console.log(user.buffer);
       res.status(200).send({ user });
     })
     .catch(next);
