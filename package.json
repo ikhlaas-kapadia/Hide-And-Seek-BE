@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/NC-project-team-2020/BE-hide-and-seek#readme",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "date-fns": "^2.12.0",
     "dotenv": "^8.2.0",
